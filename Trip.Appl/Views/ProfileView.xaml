@@ -1,0 +1,346 @@
+﻿<UserControl x:Class="Trip.App.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trip.App.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="./../UI/Style.xaml"/>
+    </UserControl.Resources>
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Margin="0 0 0 50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Command="{Binding BackCommand}">
+                <Image Source="pack://application:,,,/Assets/Images/trip_icon_back.png"
+                       Width="50"
+                       Height="50">
+                </Image>
+            </Button>
+            <Button Grid.Column="2"
+                    Height="60"
+                    Width="230"
+                    x:Name="LogoutButton"
+                    BorderBrush="#231F20"
+                    Background="#231F20"
+                    HorizontalAlignment="Left"
+                    Template="{DynamicResource TripStyleButton}"
+                    Command="{Binding LogoutCommand}"
+                    Visibility="{Binding IsLogoutButtonDraw }">
+                <TextBlock Text="Logout"
+                           FontFamily="Montserrat"
+                           FontSize="24"
+                           FontWeight="Bold">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#ffffff"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=LogoutButton}" Value="True">
+                                    <Setter Property="Foreground" Value="#231F20"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Button>
+        </Grid>
+        <StackPanel Grid.Row="1"
+                    Margin="40 0 40 100"
+                    HorizontalAlignment="Left">
+            <Border Padding="10"
+                    Width="400"
+                    Margin="0 0 0 25"
+                    BorderThickness="1"
+                    BorderBrush="#231F20">
+                <TextBlock Text="{Binding UserName}"
+                           FontFamily="Montserrat"
+                           FontSize="18">
+                </TextBlock>
+            </Border>
+            <Border Padding="10"
+                    Width="400"
+                    BorderThickness="1"
+                    BorderBrush="#231F20">
+                <TextBlock Text="{Binding Email}"
+                           FontFamily="Montserrat"
+                           FontSize="18">
+                </TextBlock>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Margin="40 0">
+            <TextBlock Text="Tirp history"
+                       FontFamily="Montserrat"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Margin="0 0 0 10">
+            </TextBlock>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding Histories}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button BorderBrush="#231F20"
+                                    BorderThickness="1"
+                                    Margin="0 0 20 0"
+                                    Padding="30"
+                                    Width="250"
+                                    Background="Transparent"
+                                    Template="{DynamicResource TripStyleHistory}" 
+                                    x:Name="MyButton"
+                                    PreviewMouseDown="MyButton_PreviewMouseDown">
+                                <Grid Height="380">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Margin="0 0 0 0">
+                                        <Border HorizontalAlignment="Center"
+                                                BorderThickness="1"
+                                                Width="45"
+                                                Height="45"
+                                                CornerRadius="30">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="BorderBrush" Value="#231F20"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                            <Setter Property="BorderBrush" Value="#ffffff"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Border CornerRadius="20"
+                                                    Width="40"
+                                                    Height="40">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Background" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                            </Border>
+                                        </Border>
+                                        <TextBlock Text="{Binding DriverName}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="24"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="#231F20"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                            <Setter Property="Foreground" Value="#ffffff"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <Rectangle Grid.Row="0"
+                                               Width="230"
+                                               Height="1"
+                                               VerticalAlignment="Bottom"
+                                               Margin="0 80 0 0">
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Setter Property="Fill" Value="#231F20"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                        <Setter Property="Fill" Value="#ffffff"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+                                    </Rectangle>
+                                    <StackPanel Grid.Row="1"
+                                                Orientation="Horizontal">
+                                        <StackPanel Margin="0 0 10 0"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <Border BorderThickness="1"
+                                                    CornerRadius="10"
+                                                    Width="15"
+                                                    Height="15">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="BorderBrush" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="BorderBrush" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Border CornerRadius="10" 
+                                                        Background="#fe4a25"
+                                                        Width="10"
+                                                        Height="10">
+                                                </Border>
+                                            </Border>
+                                            <Rectangle Width="1" 
+                                                       Height="50">
+                                                <Rectangle.Style>
+                                                    <Style TargetType="Rectangle">
+                                                        <Setter Property="Fill" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Fill" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Rectangle.Style>
+                                            </Rectangle>
+                                            <Border CornerRadius="10"
+                                                    Width="10"
+                                                    Height="10">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Background" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                            </Border>
+                                        </StackPanel>
+                                        <StackPanel VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding To}"
+                                                       FontFamily="Montserrat"
+                                                       FontSize="16"
+                                                       Foreground="#fe4a25"
+                                                       FontStyle="Normal"
+                                                       FontWeight="Medium"
+                                                       Margin="0 0 0 40">
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding From}"
+                                                       FontFamily="Montserrat"
+                                                       FontSize="16"
+                                                       FontStyle="Normal"
+                                                       FontWeight="Regular">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Foreground" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2">
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Bottom">
+                                            <TextBlock Text="{Binding Price}"
+                                                       FontFamily="Montserrat"
+                                                       FontSize="16"
+                                                       FontStyle="Normal"
+                                                       FontWeight="Medium">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Foreground" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <TextBlock Text="$"
+                                                       FontFamily="Montserrat"
+                                                       FontSize="16"
+                                                       FontStyle="Normal"
+                                                       FontWeight="Medium">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="#231F20"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                                <Setter Property="Foreground" Value="#ffffff"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Left">
+                                        <TextBlock Text="{Binding Date, StringFormat=MM/dd/yyyy}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="16"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Medium">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="#231F20"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                            <Setter Property="Foreground" Value="#ffffff"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Date, StringFormat=HH:mm}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="16"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Regular">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="#231F20"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MyButton}" Value="True">
+                                                            <Setter Property="Foreground" Value="#ffffff"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>

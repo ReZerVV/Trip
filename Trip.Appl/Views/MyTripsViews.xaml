@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="Trip.App.Views.MyTripsViews"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trip.App.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0"
+                Background="Transparent"
+                BorderThickness="0"
+                HorizontalAlignment="Left"
+                Command="{Binding BackCommand}"
+                Margin="0 0 0 50">
+            <Image Source="pack://application:,,,/Assets/Images/trip_icon_back.png"
+                   Width="50"
+                   Height="50">
+            </Image>
+        </Button>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="Your advertisements"
+                       FontFamily="Montserrat"
+                       FontSize="48"
+                       FontWeight="Bold"
+                       Margin="0 0 0 50">
+            </TextBlock>
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Hidden"
+                          HorizontalAlignment="Left">
+                <ItemsControl ItemsSource="{Binding Trips}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1"
+                                        BorderBrush="#231F20"
+                                        Background="#ffffff"
+                                        Padding="20"
+                                        Height="150"
+                                        Margin="0 0 0 40"
+                                        PreviewMouseDown="Border_PreviewMouseDown">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0"
+                                                VerticalAlignment="Bottom"
+                                                Margin="0 0 30 0">
+                                        <TextBlock Text="{Binding Date, StringFormat=HH:mm}"
+                                               FontFamily="Montserrat"
+                                               FontSize="20"
+                                               Foreground="#231F20"
+                                               FontWeight="Medium">
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Date, StringFormat=MM/dd/yyyy}"
+                                               FontFamily="Montserrat"
+                                               FontSize="20"
+                                               Foreground="#231F20"
+                                               FontWeight="Regular">
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1"
+                                                VerticalAlignment="Bottom"
+                                                Orientation="Horizontal">
+                                        <TextBlock Text="{Binding NumberOfOccupiedSeats}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   Foreground="#231F20"
+                                                   FontWeight="Regular">
+                                        </TextBlock>
+                                        <TextBlock Text="/"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   Foreground="#231F20"
+                                                   FontWeight="Regular">
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding NumberOfSeats}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   Foreground="#231F20"
+                                                   FontWeight="Regular">
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="3"
+                                                Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                Margin="10 0 0 0">
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding To}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   FontWeight="Medium"
+                                                   VerticalAlignment="Bottom">
+                                        </TextBlock>
+                                        <Image Source="pack://application:,,,/Assets/Images/trip_image_path.png"
+                                               Width="300">
+                                        </Image>
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{Binding From}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   FontWeight="Medium"
+                                                   VerticalAlignment="Top">
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="5"
+                                                VerticalAlignment="Bottom"
+                                                Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Price}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   Foreground="#231F20"
+                                                   FontWeight="SemiBold">
+                                        </TextBlock>
+                                        <TextBlock Text=" $"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="20"
+                                                   Foreground="#231F20"
+                                                   FontWeight="SemiBold">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

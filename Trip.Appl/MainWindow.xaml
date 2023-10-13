@@ -1,0 +1,48 @@
+﻿<Window x:Class="Trip.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Trip.App"
+        xmlns:viewmodels="clr-namespace:Trip.App.ViewModels"
+        xmlns:views="clr-namespace:Trip.App.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <ContentControl Content="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
+                <views:RegisterView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CreateTripViewModel}">
+                <views:CreateTripView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SearchTripViewModel}">
+                <views:SearchTripView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DetailsMyTripViewModel}">
+                <views:DetailTripView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MyTripsViewModel}">
+                <views:MyTripsViews/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MyTripViewModel}">
+                <views:DetailsMyTripView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
+                <views:ProfileView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HistoryViewModel}">
+                <views:HistoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PublicProfileViewModel}">
+                <views:ProfileView/>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
+</Window>

@@ -1,0 +1,247 @@
+﻿<UserControl x:Class="Trip.App.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trip.App.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="./../UI/Style.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="450"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              Margin="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Command="{Binding BackCommand}"
+                    Margin="0 0 0 50">
+                <Image Source="pack://application:,,,/Assets/Images/trip_icon_back.png"
+                       Width="50"
+                       Height="50">
+                </Image>
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                            Margin="0 100 0 0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding To}"
+                               FontFamily="Montserrat"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Bottom">
+                    </TextBlock>
+                    <Image 
+                           Source="pack://application:,,,/Assets/Images/trip_image_path.png"
+                           Width="600">
+                    </Image>
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding From}"
+                               FontFamily="Montserrat"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Top">
+                    </TextBlock>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="0">
+                        <Image Source="pack://application:,,,/Assets/Images/trip_icon_users.png"
+                               Width="50"
+                               Height="50"
+                               Margin="0 0 20 0">
+                        </Image>
+                        <TextBlock Text="{Binding NumberOfOccupiedSeats}"
+                                   FontFamily="Montserrat"
+                                   FontSize="40"
+                                   FontWeight="SemiBold">
+                        </TextBlock>
+                        <TextBlock Text="/"
+                                   FontFamily="Montserrat"
+                                   FontSize="40"
+                                   FontWeight="SemiBold">
+                        </TextBlock>
+                        <TextBlock Text="{Binding NumberOfSeats}"
+                                   FontFamily="Montserrat"
+                                   FontSize="40"
+                                   FontWeight="SemiBold">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="2">
+                        <TextBlock Text="{Binding Price}"
+                                   FontFamily="Montserrat"
+                                   FontSize="40"
+                                   FontWeight="SemiBold">
+                        </TextBlock>
+                        <TextBlock Text="$"
+                                   FontFamily="Montserrat"
+                                   FontSize="40"
+                                   FontWeight="SemiBold">
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1"
+              Background="#231F20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Margin="30 100 30 100">
+                <Image Source="pack://application:,,,/Assets/Images/trip_icon_user.png"
+                       Width="100"
+                       Height="100"
+                       Margin="0 0 0 10">
+                </Image>
+                <TextBlock Text="{Binding DriverName}"
+                           FontFamily="Montserrat"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="#ffffff"
+                           TextAlignment="Center"
+                           Margin="0 0 0 20">
+                </TextBlock>
+            </StackPanel>
+            <Grid Grid.Row="1"
+                  Background="#ffffff"
+                  Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0"
+                          Style="{StaticResource TripStyleComment}"
+                          BorderBrush="#231F20"
+                          BorderThickness="1"
+                          Margin="20 20 20 40">
+                    <GroupBox.Header>
+                        <Image Source="pack://application:,,,/Assets/Images/trip_icon_message.png"
+                               Width="20"
+                               Height="20">
+                        </Image>
+                    </GroupBox.Header>
+                    <StackPanel Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Grage: "
+                                FontFamily="Montserrat"
+                                 FontSize="16"
+                                 Foreground="#231F20"
+                                 FontStyle="Normal"
+                                 FontWeight="Medium">
+                            </TextBlock>
+                            <TextBox Text="{Binding Grade}"
+                                 FontFamily="Montserrat"
+                                 FontSize="16"
+                                 Foreground="#231F20"
+                                 FontStyle="Normal"
+                                 FontWeight="Light"
+                                 BorderThickness="0">
+                            </TextBox>
+                        </StackPanel>
+                        <TextBlock Text="Description: "
+                                       FontFamily="Montserrat"
+                                       FontSize="16"
+                                       Foreground="#231F20"
+                                       FontStyle="Normal"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Top">
+                        </TextBlock>
+                        <TextBox Text="{Binding Description}"
+                                     TextWrapping="Wrap"
+                                     FontFamily="Montserrat"
+                                     FontSize="16"
+                                     Foreground="#231F20"
+                                     FontStyle="Normal"
+                                     FontWeight="Light"
+                                     Height="60"
+                                     BorderThickness="0">
+                        </TextBox>
+                        <Button Template="{DynamicResource TripStyleButton}"
+                                Background="#231F20"
+                                Width="100"
+                                Height="22"
+                                HorizontalAlignment="Right"
+                                Command="{Binding AddReviewCommand}">
+                            <TextBlock Text="Done"
+                                         TextWrapping="Wrap"
+                                         FontFamily="Montserrat"
+                                         FontSize="14"
+                                         Foreground="#ffffff"
+                                         FontWeight="Medium">
+                            </TextBlock>
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+                <TextBlock Text="Comments"
+                           Grid.Row="1"
+                           FontSize="18"
+                           FontFamily="Montserrat"
+                           FontWeight="Medium"
+                           Margin="20 0 20 10">
+                </TextBlock>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                              Grid.Row="2"
+                              Margin="20 0 20 10">
+                    <ItemsControl ItemsSource="{Binding Reviews}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <GroupBox Style="{StaticResource TripStyleComment}"
+                                          BorderBrush="#231F20"
+                                          BorderThickness="1"
+                                          Margin="0 0 0 20">
+                                    <GroupBox.Header>
+                                        <TextBlock Text="{Binding ReviewerName}"
+                                                   FontFamily="Montserrat"
+                                                   FontSize="16"
+                                                   Foreground="#231F20"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Regular"/>
+                                    </GroupBox.Header>
+                                    <TextBlock Grid.Row="1"
+                                               Text="{Binding Description}"
+                                               TextWrapping="Wrap"
+                                               FontFamily="Montserrat"
+                                               FontSize="16"
+                                               Foreground="#231F20"
+                                               FontStyle="Normal"
+                                               FontWeight="Light"/>
+                                </GroupBox>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
