@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Trip.App.Commnds;
+using Trip.App.Services;
 using Trip.App.Stores;
+using Trip.Domain;
 using Trip.Services;
 using Trip.Services.Dtos.Reviews;
 using Trip.Services.Dtos.Trips;
@@ -18,8 +21,10 @@ namespace Trip.App.ViewModels
             NavigationStore navigationStore,
             AccountStore accountStore,
             TripDto tripDto,
-            IReviewService reviewService
-        )
+            IAccountService accountService,
+            ITripService tripService,
+            IReviewService reviewService,
+            NavigationService<LoginViewModel> navigationLoginViewModelService)
         {
             _accountStore = accountStore;
             _tripDto = tripDto;
@@ -27,13 +32,42 @@ namespace Trip.App.ViewModels
                 reviewService.GetReviewsByTripId(tripDto.TripId).Data.ToList()
             );
             BackCommand = new BackCommand(navigationStore);
+            AddReviewCommand = new AddReviewCommand(
+                this,
+                reviewService);
+            ToReviewerProfile = new ParameterNavigationCommand<ReviewDto, ProfileViewModel>(
+                navigationStore,
+                (ReviewDto reviewDto) => 
+                    new ProfileViewModel(
+                        reviewDto.ReviewerId,
+                        accountStore,
+                        navigationStore,
+                        accountService,
+                        tripService,
+                        reviewService,
+                        navigationLoginViewModelService)
+            );
         }
 
         public ICommand AddReviewCommand { get; }
 
         public ICommand BackCommand { get; }
-       
-        public ObservableCollection<ReviewDto> Reviews { get; set; }
+
+        public ICommand ToReviewerProfile { get; set; }
+
+        private ObservableCollection<ReviewDto> reviews;
+        public ObservableCollection<ReviewDto> Reviews 
+        {
+            get
+            {
+                return reviews;
+            }
+            set
+            {
+                reviews = value;
+                OnPropertyChanged(nameof(Reviews));
+            }
+        }
 
         public ObservableCollection<bool> RatingCells
         {

@@ -28,6 +28,8 @@ namespace Trip.App.Commnds
                     Date = _searchTripViewModel.Date.ToDateTime(TimeOnly.FromDateTime(DateTime.Now).AddMinutes(1)),
                     From = _searchTripViewModel.From,
                     To = _searchTripViewModel.To,
+                    MinPrice = _searchTripViewModel.MinPrice,
+                    MaxPrice = _searchTripViewModel.MaxPrice,
                 };
                 var result = _tripService.SearchTrip(searchQueryTripDto);
                 if (!result.Succeed)

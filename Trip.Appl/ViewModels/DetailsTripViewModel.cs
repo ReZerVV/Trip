@@ -13,6 +13,7 @@ namespace Trip.App.ViewModels
             NavigationStore navigationStore,
             AccountStore accountStore,
             TripDto tripDto,
+            IAccountService accountService,
             ITripService tripService,
             IBookingService bookingService,
             IReviewService reviewService,
@@ -26,12 +27,14 @@ namespace Trip.App.ViewModels
                 navigationStore
             );
             BackCommand = new BackCommand(navigationStore);
-            ToDriverProfile = new NavigationCommand<PublicProfileViewModel>(
-                new NavigationService<PublicProfileViewModel>(
+            ToDriverProfile = new NavigationCommand<ProfileViewModel>(
+                new NavigationService<ProfileViewModel>(
                     navigationStore,
-                    () => new PublicProfileViewModel(
-                        navigationStore,
+                    () => new ProfileViewModel(
                         tripDto.DriverId,
+                        accountStore,
+                        navigationStore,
+                        accountService,
                         tripService,
                         reviewService,
                         navigationLoginViewModelService

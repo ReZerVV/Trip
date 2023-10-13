@@ -223,52 +223,77 @@
                           Margin="10 0 10 10">
                         <GroupBox.Header>
                             <TextBlock Text="Date"
-                                   FontFamily="Montserrat"
-                                   FontSize="12"
-                                   Foreground="#231F20"
-                                   FontStyle="Normal"
-                                   FontWeight="Regular">
+                                       FontFamily="Montserrat"
+                                       FontSize="12"
+                                       Foreground="#231F20"
+                                       FontStyle="Normal"
+                                       FontWeight="Regular">
                             </TextBlock>
                         </GroupBox.Header>
                         <TextBox Text="{Binding Date, StringFormat=MM/dd/yyyy}"
-                             FontFamily="Montserrat"
-                             FontSize="16"
-                             Foreground="#231F20"
-                             FontStyle="Normal"
-                             FontWeight="Regular"
-                             BorderThickness="0">
+                                 FontFamily="Montserrat"
+                                 FontSize="16"
+                                 Foreground="#231F20"
+                                 FontStyle="Normal"
+                                 FontWeight="Regular"
+                                 BorderThickness="0">
                         </TextBox>
                     </GroupBox>
-                    <TextBlock Text="Select price"
+                    <TextBlock Text="Price between"
                            FontFamily="Montserrat"
                            FontSize="20"
                            Foreground="#231F20"
                            FontWeight="Medium"
                            Margin="10 40 10 20">
                     </TextBlock>
-                    <Slider Margin="10 0 10 0"
-                            Value="{Binding CurrentPrice}">
-                    </Slider>
                     <Grid Margin="10 0 10 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                               Text="{Binding MinPrice}"
-                               FontFamily="Montserrat"
-                               FontSize="18"
-                               Foreground="#231F20"
-                               FontWeight="Regular">
-                        </TextBlock>
-                        <TextBlock Grid.Column="2"
-                               Text="{Binding MaxPrice}"
-                               FontFamily="Montserrat"
-                               FontSize="18"
-                               Foreground="#231F20"
-                               FontWeight="Regular">
-                        </TextBlock>
+                        <GroupBox Style="{StaticResource TripStyleGroupBox}"
+                                  Grid.Column="0">
+                            <GroupBox.Header>
+                                <TextBlock Text="Min"
+                                       FontFamily="Montserrat"
+                                       FontSize="12"
+                                       Foreground="#231F20"
+                                       FontStyle="Normal"
+                                       FontWeight="Regular">
+                                </TextBlock>
+                            </GroupBox.Header>
+                            <TextBox Text="{Binding MinPrice}"
+                                     FontFamily="Montserrat"
+                                     FontSize="16"
+                                     Width="100"
+                                     Foreground="#231F20"
+                                     FontStyle="Normal"
+                                     FontWeight="Regular"
+                                     BorderThickness="0">
+                            </TextBox>
+                        </GroupBox>
+                        <GroupBox Style="{StaticResource TripStyleGroupBox}"
+                                  Grid.Column="2">
+                            <GroupBox.Header>
+                                <TextBlock Text="Max"
+                                           FontFamily="Montserrat"
+                                           FontSize="12"
+                                           Foreground="#231F20"
+                                           FontStyle="Normal"
+                                           FontWeight="Regular">
+                                </TextBlock>
+                            </GroupBox.Header>
+                            <TextBox Text="{Binding MaxPrice}"
+                                     FontFamily="Montserrat"
+                                     FontSize="16"
+                                     Width="100"
+                                     Foreground="#231F20"
+                                     FontStyle="Normal"
+                                     FontWeight="Regular"
+                                     BorderThickness="0">
+                            </TextBox>
+                        </GroupBox>
                     </Grid>
                     <TextBlock Text="{Binding ErrorMessage}"
                            FontFamily="Montserrat"

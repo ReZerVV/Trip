@@ -24,6 +24,7 @@ namespace Trip.App.ViewModels
             AccountStore accountStore,
             NavigationStore navigationStore,
             ITripService tripService,
+            IAccountService accountService,
             IReviewService reviewService,
             IBookingService bookingService,
             NavigationService<LoginViewModel> navigationLoginViewModelService)
@@ -40,6 +41,7 @@ namespace Trip.App.ViewModels
                     param,
                     navigationStore,
                     accountStore,
+                    accountService,
                     tripService,
                     reviewService,
                     bookingService,

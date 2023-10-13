@@ -40,9 +40,6 @@
             <DataTemplate DataType="{x:Type viewmodels:HistoryViewModel}">
                 <views:HistoryView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:PublicProfileViewModel}">
-                <views:ProfileView/>
-            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 </Window>

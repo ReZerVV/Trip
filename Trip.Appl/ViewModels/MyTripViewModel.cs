@@ -15,6 +15,7 @@ namespace Trip.App.ViewModels
             TripDto tripDto,
             NavigationStore navigationStore,
             AccountStore accountStore,
+            IAccountService accountService,
             ITripService tripService,
             IReviewService reviewService,
             IBookingService bookingService,
@@ -46,11 +47,13 @@ namespace Trip.App.ViewModels
                 accountStore,
                 bookingService
             );
-            ToUserProfileCommand = new ParameterNavigationCommand<int, PublicProfileViewModel>(
+            ToUserProfileCommand = new ParameterNavigationCommand<int, ProfileViewModel>(
                 navigationStore,
-                (int appUserId) => new PublicProfileViewModel(
-                    navigationStore,
+                (int appUserId) => new ProfileViewModel(
                     appUserId,
+                    accountStore,
+                    navigationStore,
+                    accountService,
                     tripService,
                     reviewService,
                     navigationLoginViewModelService));

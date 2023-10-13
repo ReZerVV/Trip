@@ -16,6 +16,7 @@ namespace Trip.App.ViewModels
             NavigationStore navigationStore,
             AccountStore accountStore,
             ITripService tripService,
+            IAccountService accountService,
             IBookingService bookingService,
             IReviewService reviewService,
             NavigationService<LoginViewModel> navigationLoginViewModelService)
@@ -30,7 +31,8 @@ namespace Trip.App.ViewModels
                     navigationStore,
                     accountStore,
                     param,
-                    tripService,
+                    accountService,
+                    tripService, 
                     bookingService,
                     reviewService,
                     navigationLoginViewModelService
@@ -55,8 +57,6 @@ namespace Trip.App.ViewModels
             {
                 trips = value;
                 OnPropertyChanged(nameof(Trips));
-                OnPropertyChanged(nameof(MinPrice));
-                OnPropertyChanged(nameof(MaxPrice));
             }
         }
 
@@ -102,22 +102,33 @@ namespace Trip.App.ViewModels
             }
         }
 
-        private int currentPrice;
-        public int CurrentPrice
+        private decimal minPrsice;
+        public decimal MinPrice
         {
             get
             {
-                return currentPrice;
+                return minPrsice;
             }
             set
             {
-                currentPrice = value;
-                OnPropertyChanged(nameof(CurrentPrice));
+                minPrsice = value;
+                OnPropertyChanged(nameof(MinPrice));
             }
         }
 
-        public decimal MinPrice => Trips.Select(trip => trip.Price).Min();
-        public decimal MaxPrice => Trips.Select(trip => trip.Price).Max();
+        private decimal maxPrice;
+        public decimal MaxPrice
+        {
+            get
+            {
+                return maxPrice;
+            }
+            set
+            {
+                maxPrice = value;
+                OnPropertyChanged(nameof(MaxPrice));
+            }
+        }
 
         private string resultMessage;
         public string ResultMessage
